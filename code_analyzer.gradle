@@ -16,21 +16,23 @@ checkstyle{
   toolVersion='6.15'
   ignoreFailures = false
   sourceSets = [sourceSets.main]
-  configFile = 'code_analyze_and_test/config/checkstyle/checkstyle.xml' as File
+  configFile = 'code_analyzer/config/checkstyle/checkstyle.xml' as File
   //exclude the package you do not want to check
-  //  checkstyleMain.exclude 'io/reactivesw/customerauthentication/infrastructure/grpc/**'
+  checkstyleMain.exclude 'io/reactivesw/customerauthentication/grpc/**'
 }
 
 /*************PMD(Project Manager Design)***************/
 pmd.toolVersion='5.5.0'
 pmd  {
   ignoreFailures=false
-  ruleSetFiles = files("code_analyze_and_test/config/pmd/ruleset.xml")
+  ruleSetFiles = files("code_analyzer/config/pmd/ruleset.xml")
 
   sourceSets = [sourceSets.main]
 }
 tasks.withType(Pmd) {  //exclude the package you do not want to check
-  exclude 'io/reactivesw/customer/authentication/CustomerAuthWebserverApp.java'  }
+  exclude 'io/reactivesw/customerauthentication/grpc/*'  
+  exclude 'io/reactivesw/customerauthentication/App.java'  
+}
 
 
 /*************find bug***************/
@@ -43,7 +45,7 @@ findbugs {
 tasks.withType(FindBugs) {
   //exclude the package you do not want to check
   classes = classes.filter {
-    !it.path.contains('io/reactivesw/customerauthentication/infrastructure/grpc/')
+    !it.path.contains('io/reactivesw/customerauthentication/grpc/')
   }
   reports {
     xml.enabled false

@@ -13,6 +13,8 @@
     <!-- sometimes conflict with rule of UnnecessaryConstructor -->
     <exclude name="AtLeastOneConstructor" />
     <exclude name="DataflowAnomalyAnalysis" />
+    <!-- conflict with LocalVariableCouldBeFinal -->
+    <exclude name="AvoidFinalLocalVariable" />
   </rule>
   <rule ref="code_analyzer/config/pmd/rulesets/coupling.xml">
     <!-- to suppress warnings -->
@@ -28,14 +30,15 @@
   <rule ref="code_analyzer/config/pmd/rulesets/javabeans.xml">
   </rule>
   <rule ref="code_analyzer/config/pmd/rulesets/junit.xml"></rule>
-  <rule
-    ref="code_analyzer/config/pmd/rulesets/logging-jakarta-commons.xml"></rule>
+  <rule ref="code_analyzer/config/pmd/rulesets/logging-jakarta-commons.xml"></rule>
   <rule ref="code_analyzer/config/pmd/rulesets/logging-java.xml"></rule>
   <rule ref="code_analyzer/config/pmd/rulesets/migrating.xml"></rule>
   <rule ref="code_analyzer/config/pmd/rulesets/naming.xml"></rule>
   <rule ref="code_analyzer/config/pmd/rulesets/optimizations.xml">
     <!-- too many final -->
     <exclude name="MethodArgumentCouldBeFinal"></exclude>
+    <!-- too many final -->
+    <exclude name="LocalVariableCouldBeFinal"></exclude>
   </rule>
   <rule ref="code_analyzer/config/pmd/rulesets/strictexception.xml"></rule>
   <rule ref="code_analyzer/config/pmd/rulesets/strings.xml"></rule>

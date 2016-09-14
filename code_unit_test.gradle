@@ -6,10 +6,7 @@ jacocoTestReport {
   afterEvaluate {
     classDirectories = files(classDirectories.files.collect {
       fileTree(dir: it, exclude: [
-        'io/reactivesw/shoppingcart/ShoppingCartServiceStarter*',
-        'io/reactivesw/shoppingcart/domain/model/*',
-        'io/reactivesw/shoppingcart/infrastructure/*',
-        'io/reactivesw/shoppingcart/grpc/*'
+//        'io/reactivesw/customerauthentication/grpc/*',
       ])
     })
   }

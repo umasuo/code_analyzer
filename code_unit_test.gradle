@@ -6,7 +6,10 @@ jacocoTestReport {
   afterEvaluate {
     classDirectories = files(classDirectories.files.collect {
       fileTree(dir: it, exclude: [
-//        'io/reactivesw/customerauthentication/grpc/*',
+        'io/reactivesw/customerauthentication/grpc/*',
+        'io/reactivesw/customerauthentication/App*',
+        'io/reactivesw/customerauthentication/CustomerAuthenticationServer*',
+        'io/reactivesw/customerauthentication/domain/*',
       ])
     })
   }

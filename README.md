@@ -13,3 +13,4 @@ use the fellow command to update the submodule
 
 go to the submodule's folder and use `git add ` `git commit ` `git push` to submit your change
 
+if you want to use your own config, please use your own branch, like `customer_authentication`, and add `branch = customer_authentication` to your file: `.gitmodules`

@@ -8,11 +8,10 @@ jacocoTestReport {
       fileTree(dir: it, exclude: [
         'io/reactivesw/customerauthentication/grpc/*',
         'io/reactivesw/customerauthentication/App*',
-        'io/reactivesw/customerauthentication/CustomerAuthenticationServer*',
-        'io/reactivesw/customerauthentication/entity/*',
-        'io/reactivesw/customerauthentication/config/*',
-        'io/reactivesw/customerauthentication/enums/*',
-        'io/reactivesw/customerauthentication/exception/*',
+        'io/reactivesw/customerauthentication/domain/entity/*',
+        'io/reactivesw/customerauthentication/infrastructure/config/*',
+        'io/reactivesw/customerauthentication/infrastructure/enums/*',
+        'io/reactivesw/customerauthentication/infrastructure/exception/*',
       ])
     })
   }

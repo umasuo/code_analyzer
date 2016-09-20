@@ -22,6 +22,7 @@
     <exclude name="LawOfDemeter" />
   </rule>
   <rule ref="code_analyzer/config/pmd/rulesets/design.xml">
+    <exclude name="PreserveStackTrace" />
   </rule>
   <rule ref="code_analyzer/config/pmd/rulesets/empty.xml"></rule>
   <rule ref="code_analyzer/config/pmd/rulesets/finalizers.xml"></rule>
@@ -31,7 +32,9 @@
   </rule>
   <rule ref="code_analyzer/config/pmd/rulesets/junit.xml"></rule>
   <rule ref="code_analyzer/config/pmd/rulesets/logging-jakarta-commons.xml"></rule>
-  <rule ref="code_analyzer/config/pmd/rulesets/logging-java.xml"></rule>
+  <rule ref="code_analyzer/config/pmd/rulesets/logging-java.xml">
+    <exclude name="InvalidSlf4jMessageFormat" />
+  </rule>
   <rule ref="code_analyzer/config/pmd/rulesets/migrating.xml"></rule>
   <rule ref="code_analyzer/config/pmd/rulesets/naming.xml"></rule>
   <rule ref="code_analyzer/config/pmd/rulesets/optimizations.xml">

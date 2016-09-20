@@ -9,12 +9,15 @@ jacocoTestReport {
         'io/reactivesw/customerauthentication/grpc/*',
         'io/reactivesw/customerauthentication/App*',
         'io/reactivesw/customerauthentication/CustomerAuthenticationServer*',
-        'io/reactivesw/customerauthentication/domain/*',
+        'io/reactivesw/customerauthentication/entity/*',
+        'io/reactivesw/customerauthentication/config/*',
+        'io/reactivesw/customerauthentication/enums/*',
+        'io/reactivesw/customerauthentication/exception/*',
       ])
     })
   }
 }
 
 jacocoCoverage { // Enforce minimum code coverage of 80% for every Java file.
-  fileThreshold 0.0 }
+  fileThreshold 0.8 }
 

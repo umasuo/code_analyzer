@@ -11,7 +11,6 @@ use the fellow command to update the submodule
 
 `git submodule foreach git pull`
 
-go to the submodule's folder and use `git add ` `git commit ` `git push` to submit your change
 
 # add your own config
 add folder:`code_analyzer_test_local` to your project root, it contains two files:`code_analyzer.gradle`,`code_unit_test.gradle`
@@ -31,15 +30,15 @@ add folder:`code_analyzer_test_local` to your project root, it contains two file
 >     /*************checkstyle(use google java style)***************/
 >     
 >     checkstyle{
->       //exclude the package you do not want to check
->           *your own config*
+>       // exclude the package you do not want to check
+>       // your own config
 >       //checkstyleMain.exclude 'io/reactivesw/customerauthentication/grpc/*'
 >     }
 >     
 >     /*************PMD(Project Manager Design)***************/
 >     tasks.withType(Pmd) {
 >       //exclude the package you do not want to check
->       *your own config*
+>       // your own config
 >       //exclude 'io/reactivesw/customerauthentication/App*'
 >     }
 >     
@@ -48,7 +47,7 @@ add folder:`code_analyzer_test_local` to your project root, it contains two file
 >     tasks.withType(FindBugs) {
 >       //exclude the package you do not want to check
 >       classes = classes.filter {
->         *your own config*
+>         // your own config
 >         //!it.path.contains('io/reactivesw/customerauthentication/grpc/')
 >       }
 >     }
@@ -64,7 +63,7 @@ add folder:`code_analyzer_test_local` to your project root, it contains two file
 >       afterEvaluate {
 >         classDirectories = files(classDirectories.files.collect {
 >           fileTree(dir: it, exclude: [
->                *your own config*
+>             // your own config
 >             //'io/reactivesw/customerauthentication/grpc/*',
 >           ])
 >         })

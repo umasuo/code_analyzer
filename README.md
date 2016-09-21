@@ -5,7 +5,7 @@ the tools we used to analyze our code
 
 add the project as a submodule, so that you can keep your resources up to date
 
-`git submodule add https://github.com/reactivesw/code_analyzer.git`
+`git submodule add https://github.com/reactivesw/code_analyzer_test.git`
 
 use the fellow command to update the submodule
 
@@ -13,17 +13,15 @@ use the fellow command to update the submodule
 
 go to the submodule's folder and use `git add ` `git commit ` `git push` to submit your change
 
-if you want to use your own config, please use your own branch, like `customer_authentication`, and add `branch = customer_authentication` to your file: `.gitmodules`
-
 # add your own config
-add folder:`analyzer_scripts` to your project root, it contains two files:`code_analyzer.gradle`,`code_unit_test.gradle`
+add folder:`code_analyzer_test_local` to your project root, it contains two files:`code_analyzer.gradle`,`code_unit_test.gradle`
 ## code_analyzer.gradle
 >     apply plugin: 'java'
 >     apply plugin: 'maven'
 >     apply plugin: "checkstyle"
 >     apply plugin: "pmd"
 >     apply plugin: "findbugs"
->     apply from:'code_analyzer/code_analyzer_config.gradle'
+>     apply from:'code_analyzer_test/code_analyzer_config.gradle'
 >     
 >     repositories {
 >       maven { url "http://jcenter.bintray.com" }
@@ -59,7 +57,7 @@ add folder:`analyzer_scripts` to your project root, it contains two files:`code_
 ## code_unit_test.gradle
 >     apply plugin: "com.palantir.jacoco-coverage"
 >     apply plugin: 'groovy'
->     apply from:'code_analyzer/unit_test_config.gradle'
+>     apply from:'code_analyzer_test/unit_test_config.gradle'
 >     
 >     //config of coverage check, see document: https://github.com/palantir/gradle-jacoco-coverage
 >     jacocoTestReport {
@@ -76,5 +74,5 @@ add folder:`analyzer_scripts` to your project root, it contains two files:`code_
 > 
 
 # change build.gradle
->     apply from: 'analyzer_scripts/code_analyzer.gradle'
->     apply from: 'analyzer_scripts/code_unit_test.gradle'
+>     apply from: 'code_analyzer_test_local/code_analyzer.gradle'
+>     apply from: 'code_analyzer_test_local/code_unit_test.gradle'

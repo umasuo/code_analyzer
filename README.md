@@ -17,9 +17,9 @@ add folder:`code_analyzer_test_local` to your project root, it contains two file
 ## code_analyzer.gradle
 >     apply plugin: 'java'
 >     apply plugin: 'maven'
->     apply plugin: "checkstyle"
->     apply plugin: "pmd"
->     apply plugin: "findbugs"
+>     apply plugin: 'checkstyle'
+>     apply plugin: 'pmd'
+>     apply plugin: 'findbugs'
 >     apply from:'code_analyzer_test/code_analyzer_config.gradle'
 >     
 >     repositories {

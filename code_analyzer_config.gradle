@@ -1,14 +1,3 @@
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: "checkstyle"
-apply plugin: "pmd"
-apply plugin: "findbugs"
-
-repositories {
-  maven { url "http://jcenter.bintray.com" }
-  maven { url "https://repo.maven.apache.org/maven2" }
-}
-
 /*************checkstyle(use google java style)***************/
 
 checkstyle{
@@ -17,8 +6,6 @@ checkstyle{
   ignoreFailures = false
   sourceSets = [sourceSets.main]
   configFile = 'code_analyzer/config/checkstyle/checkstyle.xml' as File
-  //exclude the package you do not want to check
-  checkstyleMain.exclude 'io/reactivesw/customerauthentication/grpc/*'
 }
 
 /*************PMD(Project Manager Design)***************/
@@ -29,11 +16,6 @@ pmd  {
 
   sourceSets = [sourceSets.main]
 }
-tasks.withType(Pmd) {  //exclude the package you do not want to check
-  exclude 'io/reactivesw/customerauthentication/grpc/*'
-  exclude 'io/reactivesw/customerauthentication/App*'
-}
-
 
 /*************find bug***************/
 findbugs {
@@ -43,10 +25,6 @@ findbugs {
   reportLevel = "medium"
 }
 tasks.withType(FindBugs) {
-  //exclude the package you do not want to check
-  classes = classes.filter {
-    !it.path.contains('io/reactivesw/customerauthentication/grpc/')
-  }
   reports {
     xml.enabled false
     html.enabled true

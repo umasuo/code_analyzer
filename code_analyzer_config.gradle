@@ -5,14 +5,14 @@ checkstyle{
   toolVersion='6.15'
   ignoreFailures = false
   sourceSets = [sourceSets.main]
-  configFile = 'code_analyzer/config/checkstyle/checkstyle.xml' as File
+  configFile = 'code_analyzer_test/config/checkstyle/checkstyle.xml' as File
 }
 
 /*************PMD(Project Manager Design)***************/
 pmd.toolVersion='5.5.0'
 pmd  {
   ignoreFailures=false
-  ruleSetFiles = files("code_analyzer/config/pmd/ruleset.xml")
+  ruleSetFiles = files("code_analyzer_test/config/pmd/ruleset.xml")
 
   sourceSets = [sourceSets.main]
 }

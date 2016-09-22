@@ -15,7 +15,7 @@ To use it, perform the following steps:
 
 Add this repository as a submodule, so that you can keep your resources up to date: `git submodule add https://github.com/reactivesw/code_analyzer_test.git`
 
-To update the submodule when there is an upate, run command: `git submodule foreach git pull`
+To update the submodule when there is an upate, run command: `git submodule foreach git pull`. Then you need to commit change in parent project to fully synchronize with the submodule. 
 
 **In case you want to remove the submodule**, there are 3 steps before you commit and push the changes:
 ```sh

@@ -13,13 +13,21 @@ To use it, perform the following steps:
 
 ## 1. Add a submodule in your repository
 
-Add this repository as a submodule, so that you can keep your resources up to date
+Add this repository as a submodule, so that you can keep your resources up to date: `git submodule add https://github.com/reactivesw/code_analyzer_test.git`
 
-`git submodule add https://github.com/reactivesw/code_analyzer_test.git`
+Use the fellow command to update the submodule: `git submodule foreach git pull`
 
-use the fellow command to update the submodule
+**In case you want to remove the submodule**, there are 3 steps before you commit and push the changes:
+```sh
+// Remove the submodule entry from .git/config
+git submodule deinit -f path/to/submodule
 
-`git submodule foreach git pull`
+// Remove the submodule directory from the superproject's .git/modules directory
+rm -rf .git/modules/path/to/submodule
+
+// Remove the entry in .gitmodules and remove the submodule directory located at path/to/submodule
+git rm -f path/to/submodule
+```
 
 
 ## 2. Cusotmize for Your Project

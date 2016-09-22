@@ -1,5 +1,7 @@
 # Code Analyzer and Test Coverage
-This repository contains configurations of tools we used to analyze code, test code and report test coverage.  The tools include:
+
+This repository contains team-wide configurations of tools we used to analyze code, test code and report test coverage. **Be careful and get team approval** before making any changes. 
+The tools include:
 * `checkstyle`
 * `pmd`
 * `findbugs`
@@ -7,9 +9,11 @@ This repository contains configurations of tools we used to analyze code, test c
 
 The `com.palantir.jacoco-coverage` is an external dependency that requires extra buildscript setup (see below). 
 
-## how to use this project
+To use it, perform the following steps: 
 
-add this repository as a submodule, so that you can keep your resources up to date
+## 1. Add a submodule in your repository
+
+Add this repository as a submodule, so that you can keep your resources up to date
 
 `git submodule add https://github.com/reactivesw/code_analyzer_test.git`
 
@@ -17,12 +21,11 @@ use the fellow command to update the submodule
 
 `git submodule foreach git pull`
 
-This 
 
-# add your own config
-add folder:`code_analyzer_test_local` to your project root, it contains two files:`code_analyzer.gradle`,`code_test_coverage.gradleadle`
+## 2. Cusotmize for Your Project
+Add a folder named`code_analyzer_test_local` to your project root, it should contain two files:`code_analyzer.gradle`,`code_test_coverage.gradleadle` that are created from the following contents:
 
-## code_analyzer.gradle
+### 2.1 `code_analyzer.gradle`
 ```groovy
 
 apply plugin: 'checkstyle'
@@ -56,7 +59,7 @@ tasks.withType(FindBugs) {
 }
 ```
 
-## code_test_coverage.gradle
+### 2.2 `code_test_coverage.gradle`
 ```groovy
 // for spock unit test
 dependencies {
@@ -78,9 +81,9 @@ jacocoCoverage {
 }
 ```
 
-# change build.gradle to apply code analyzer and test coverage
+## 3. Change `build.gradle` to Apply Code Analyzer and Test Coverage
 
-## Add External classpath Dependency
+### 3.1 Add External classpath Dependency
 Add `classpath 'com.palantir:jacoco-coverage:0.4.0'` in the `buildscript { dependencies {...}}` section. 
 ```groovy
 buildscript {
@@ -94,9 +97,9 @@ buildscript {
 }
 ```
 
-## Apply Analyzer and Code Coverage
+### 3.2 Apply Analyzer and Code Coverage
 
-Then apply the following two files to the late part of the `build.gradle` file -- better in the later section. 
+Then apply the customized configuration files to the `build.gradle` file -- better in the later section. 
 
 ```groovy 
 apply from: 'code_analyzer_test_local/code_analyzer.gradle'

@@ -26,6 +26,8 @@ use the fellow command to update the submodule
 Add a folder named`code_analyzer_test_local` to your project root, it should contain two files:`code_analyzer.gradle`,`code_test_coverage.gradleadle` that are created from the following contents:
 
 ### 2.1 `code_analyzer.gradle`
+This file applies `checkstyle`, `pmd`, and `findbug` to a project and let you define excluded files/folders etc. 
+
 ```groovy
 
 apply plugin: 'checkstyle'
@@ -60,6 +62,7 @@ tasks.withType(FindBugs) {
 ```
 
 ### 2.2 `code_test_coverage.gradle`
+This file applies spock unit test and jacoco coverage to your project. It let you customize scopes/files tested and reported. 
 ```groovy
 // for spock unit test
 dependencies {
@@ -82,6 +85,7 @@ jacocoCoverage {
 ```
 
 ## 3. Change `build.gradle` to Apply Code Analyzer and Test Coverage
+Because we apply code analyzers, Spock test and coverage in the above files, we just include them to the `build.gradle` to enable their functions.  
 
 ### 3.1 Add External classpath Dependency
 Add `classpath 'com.palantir:jacoco-coverage:0.4.0'` in the `buildscript { dependencies {...}}` section. 

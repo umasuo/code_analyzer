@@ -73,6 +73,7 @@ tasks.withType(FindBugs) {
 This file applies spock unit test and jacoco coverage to your project. It let you customize scopes/files tested and reported. 
 ```groovy
 // for spock unit test
+apply plugin: 'groovy'
 dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.spockframework:spock-spring:1.0-groovy-2.4')

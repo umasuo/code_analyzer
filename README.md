@@ -31,14 +31,12 @@ add folder:`code_analyzer_test_local` to your project root, it contains two file
 >     
 >     checkstyle{
 >       // exclude the package you do not want to check
->       // your own config
 >       //checkstyleMain.exclude 'io/reactivesw/customerauthentication/grpc/*'
 >     }
 >     
 >     /*************PMD(Project Manager Design)***************/
 >     tasks.withType(Pmd) {
 >       //exclude the package you do not want to check
->       // your own config
 >       //exclude 'io/reactivesw/customerauthentication/App*'
 >     }
 >     
@@ -47,7 +45,6 @@ add folder:`code_analyzer_test_local` to your project root, it contains two file
 >     tasks.withType(FindBugs) {
 >       //exclude the package you do not want to check
 >       classes = classes.filter {
->         // your own config
 >         //!it.path.contains('io/reactivesw/customerauthentication/grpc/')
 >       }
 >     }
@@ -63,7 +60,6 @@ add folder:`code_analyzer_test_local` to your project root, it contains two file
 >       afterEvaluate {
 >         classDirectories = files(classDirectories.files.collect {
 >           fileTree(dir: it, exclude: [
->             // your own config
 >             //'io/reactivesw/customerauthentication/grpc/*',
 >           ])
 >         })

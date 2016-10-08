@@ -1,78 +1,120 @@
-# code_analyzer
-the tools we used to analyze our code
+# Code Analyzer and Test Coverage
 
-## how to use this project
+This repository contains team-wide configurations of tools we used to analyze code, test code and report test coverage. **Be careful and get team approval** before making any changes. 
+The tools include:
+* `checkstyle`
+* `pmd`
+* `findbugs`
+* `com.palantir.jacoco-coverage` 
 
-add the project as a submodule, so that you can keep your resources up to date
+The `com.palantir.jacoco-coverage` is an external dependency that requires extra buildscript setup (see below). 
 
-`git submodule add https://github.com/reactivesw/code_analyzer_test.git`
+To use it, perform the following steps: 
 
-use the fellow command to update the submodule
+## 1. Add a submodule in your repository
 
-`git submodule foreach git pull`
+Add this repository as a submodule, so that you can keep your resources up to date: `git submodule add https://github.com/reactivesw/code_analyzer_test.git`
 
-go to the submodule's folder and use `git add ` `git commit ` `git push` to submit your change
+To update the submodule when there is an upate, run command: `git submodule foreach git pull`. Then you need to commit change in parent project to fully synchronize with the submodule. 
 
-# add your own config
-add folder:`code_analyzer_test_local` to your project root, it contains two files:`code_analyzer.gradle`,`code_unit_test.gradle`
-## code_analyzer.gradle
->     apply plugin: 'java'
->     apply plugin: 'maven'
->     apply plugin: "checkstyle"
->     apply plugin: "pmd"
->     apply plugin: "findbugs"
->     apply from:'code_analyzer_test/code_analyzer_config.gradle'
->     
->     repositories {
->       maven { url "http://jcenter.bintray.com" }
->       maven { url "https://repo.maven.apache.org/maven2" }
->     }
->     
->     /*************checkstyle(use google java style)***************/
->     
->     checkstyle{
->       //exclude the package you do not want to check
->           *your own config*
->       //checkstyleMain.exclude 'io/reactivesw/customerauthentication/grpc/*'
->     }
->     
->     /*************PMD(Project Manager Design)***************/
->     tasks.withType(Pmd) {
->       //exclude the package you do not want to check
->       *your own config*
->       //exclude 'io/reactivesw/customerauthentication/App*'
->     }
->     
->     
->     /*************find bug***************/
->     tasks.withType(FindBugs) {
->       //exclude the package you do not want to check
->       classes = classes.filter {
->         *your own config*
->         //!it.path.contains('io/reactivesw/customerauthentication/grpc/')
->       }
->     }
-> 
+**In case you want to remove the submodule**, there are 3 steps before you commit and push the changes:
+```sh
+// Remove the submodule entry from .git/config
+git submodule deinit -f path/to/submodule
 
-## code_unit_test.gradle
->     apply plugin: "com.palantir.jacoco-coverage"
->     apply plugin: 'groovy'
->     apply from:'code_analyzer_test/unit_test_config.gradle'
->     
->     //config of coverage check, see document: https://github.com/palantir/gradle-jacoco-coverage
->     jacocoTestReport {
->       afterEvaluate {
->         classDirectories = files(classDirectories.files.collect {
->           fileTree(dir: it, exclude: [
->                *your own config*
->             //'io/reactivesw/customerauthentication/grpc/*',
->           ])
->         })
->       }
->     }
->     
-> 
+// Remove the submodule directory from the superproject's .git/modules directory
+rm -rf .git/modules/path/to/submodule
 
-# change build.gradle
->     apply from: 'code_analyzer_test_local/code_analyzer.gradle'
->     apply from: 'code_analyzer_test_local/code_unit_test.gradle'
+// Remove the entry in .gitmodules and remove the submodule directory located at path/to/submodule
+git rm -f path/to/submodule
+```
+
+
+## 2. Cusotmize for Your Project
+Add a folder named`code_analyzer_test_local` to your project root, it should contain two files:`code_analyzer.gradle`,`code_test_coverage.gradleadle` that are created from the following contents:
+
+### 2.1 `code_analyzer.gradle`
+This file applies `checkstyle`, `pmd`, and `findbug` to a project and let you define excluded files/folders etc. 
+
+```groovy
+
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
+// apply all configurations
+apply from:'code_analyzer_test/code_analyzer_config.gradle'
+
+/*************checkstyle(use google java style)***************/
+
+checkstyle{
+    //exclude the package you do not want to check
+    //checkstyleMain.exclude 'io/reactivesw/customerauthentication/grpc/*'
+}
+
+/*************PMD(Project Manager Design)***************/
+tasks.withType(Pmd) {
+    //exclude the package you do not want to check
+    //exclude 'io/reactivesw/customerweb/Application.java'
+}
+
+/*************find bug***************/
+tasks.withType(FindBugs) {
+    //exclude the package you do not want to check
+    /* findBugs doesn't work if the filter is empty. Comment all if nothing to exclude
+    classes = classes.filter {
+        !it.path.contains('io/reactivesw/customerauthentication/grpc/')
+    }
+    */
+}
+```
+
+### 2.2 `code_test_coverage.gradle`
+This file applies spock unit test and jacoco coverage to your project. It let you customize scopes/files tested and reported. 
+```groovy
+// for spock unit test
+apply plugin: 'groovy'
+dependencies {
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.spockframework:spock-spring:1.0-groovy-2.4')
+}
+
+// for code coverage
+apply plugin: 'com.palantir.jacoco-coverage'
+apply from:'code_analyzer_test/test_coverage_config.gradle'
+
+// config of coverage check
+// see document: https://github.com/palantir/gradle-jacoco-coverage
+jacocoCoverage {
+    // Scopes can be exempt from all coverage requirements by exact scope name or scope name pattern.
+    fileThreshold 0.0, "Application.java"
+//    packageThreshold 0.0, "org/company/module"
+//    fileThreshold 0.0, ~".*Test.java"
+}
+```
+
+## 3. Change `build.gradle` to Apply Code Analyzer and Test Coverage
+Because we apply code analyzers, Spock test and coverage in the above files, we just include them to the `build.gradle` to enable their functions.  
+
+### 3.1 Add External classpath Dependency
+Add `classpath 'com.palantir:jacoco-coverage:0.4.0'` in the `buildscript { dependencies {...}}` section. 
+```groovy
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        // for unit test code coverage  -- need to find a way to put it in its file
+        classpath 'com.palantir:jacoco-coverage:0.4.0'
+    }
+}
+```
+
+### 3.2 Apply Analyzer and Code Coverage
+
+Then apply the customized configuration files to the `build.gradle` file -- better in the later section. 
+
+```groovy 
+apply from: 'code_analyzer_test_local/code_analyzer.gradle'
+apply from: 'code_analyzer_test_local/code_test_coverage.gradle'
+```

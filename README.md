@@ -17,6 +17,8 @@ Add this repository as a submodule, so that you can keep your resources up to da
 
 To update the submodule when there is an upate, run command: `git submodule foreach git pull`. Then you need to commit change in parent project to fully synchronize with the submodule. 
 
+When you clone a repository that uses a submodule, you need to run `git submodule update --init --recursive` to pull the submodules from github. 
+
 **In case you want to remove the submodule**, there are 3 steps before you commit and push the changes:
 ```sh
 // Remove the submodule entry from .git/config

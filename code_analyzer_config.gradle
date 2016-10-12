@@ -11,7 +11,6 @@ checkstyle{
 
   sourceSets = [sourceSets.main]
 
-  configFile = 'https://raw.githubusercontent.com/reactivesw/code_analyzer_test/config/checkstyle/checkstyle.xml' as File
 }
 
 /*************PMD(Project Manager Design)***************/
@@ -21,8 +20,6 @@ pmd  {
   ignoreFailures = false
 
   sourceSets = [sourceSets.main]
-
-  ruleSetFiles = files("https://raw.githubusercontent.com/reactivesw/code_analyzer_test/config/pmd/ruleset.xml")
 
 }
 

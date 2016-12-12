@@ -29,7 +29,9 @@
   </rule>
   <rule ref="code_analyzer_test/config/pmd/rulesets/empty.xml"></rule>
   <rule ref="code_analyzer_test/config/pmd/rulesets/finalizers.xml"></rule>
-  <rule ref="code_analyzer_test/config/pmd/rulesets/imports.xml"></rule>
+  <rule ref="code_analyzer_test/config/pmd/rulesets/imports.xml">
+    <exclude name="TooManyStaticImports"/>
+  </rule>
   <rule ref="code_analyzer_test/config/pmd/rulesets/j2ee.xml"></rule>
   <rule ref="code_analyzer_test/config/pmd/rulesets/javabeans.xml">
   </rule>

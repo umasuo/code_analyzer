@@ -23,6 +23,7 @@
     <!-- to suppress warnings -->
     <exclude name="LoosePackageCoupling" />
     <exclude name="LawOfDemeter" />
+    <exclude name="ExcessiveImports"/>
   </rule>
   <rule ref="code_analyzer_test/config/pmd/rulesets/design.xml">
     <exclude name="PreserveStackTrace" />

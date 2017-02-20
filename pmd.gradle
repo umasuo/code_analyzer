@@ -14,5 +14,5 @@ pmd  {
 
     sourceSets = [sourceSets.main]
 
-    ruleSetFiles = files("../code_analyzer_test/config/pmd/ruleset.xml")
+    ruleSetFiles = files("../code_analyzer/config/pmd/ruleset.xml")
 }

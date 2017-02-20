@@ -14,5 +14,5 @@ checkstyle{
 
     sourceSets = [sourceSets.main]
 
-    configFile = '../code_analyzer_test/config/checkstyle/checkstyle.xml' as File
+    configFile = '../code_analyzer/config/checkstyle/checkstyle.xml' as File
 }
